@@ -1,5 +1,6 @@
-// Meta OAuth — Facebook Pages + Instagram ONLY
-// Threads uses a separate flow at /api/auth/threads
+// Threads OAuth — separate from Facebook/Instagram
+// Uses Threads-specific OAuth endpoint and scopes
+// Docs: https://developers.facebook.com/docs/threads/get-started
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
@@ -8,35 +9,28 @@ export async function GET() {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
   if (!appId) {
-    console.error("[meta/auth] META_APP_ID not set");
+    console.error("[threads/auth] META_APP_ID not set");
     return NextResponse.json(
-      { error: "META_APP_ID not set. Add it in your environment variables." },
+      { error: "META_APP_ID not set. Threads uses the same Meta app, but requires a separate sign-in." },
       { status: 500 }
     );
   }
 
   const state = crypto.randomBytes(16).toString("hex");
 
-  const scopes = [
-    "pages_show_list",
-    "pages_read_engagement",
-    "pages_manage_posts",
-    "instagram_basic",
-    "instagram_content_publish",
-  ].join(",");
-
+  // Threads has its OWN OAuth endpoint and its own scopes
   const params = new URLSearchParams({
     client_id: appId,
-    redirect_uri: `${appUrl}/api/auth/meta/callback`,
-    scope: scopes,
+    redirect_uri: `${appUrl}/api/auth/threads/callback`,
+    scope: "threads_basic,threads_content_publish",
     response_type: "code",
     state,
   });
 
   const response = NextResponse.redirect(
-    `https://www.facebook.com/v22.0/dialog/oauth?${params}`
+    `https://threads.net/oauth/authorize?${params}`
   );
-  response.cookies.set("meta_state", state, {
+  response.cookies.set("threads_state", state, {
     httpOnly: true,
     maxAge: 600,
     path: "/",
