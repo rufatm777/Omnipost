@@ -1,0 +1,3 @@
+This directory stores OAuth tokens locally.
+The tokens.json file is auto-created when you connect accounts.
+Do NOT commit tokens.json to git.

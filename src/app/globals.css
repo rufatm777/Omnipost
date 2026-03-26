@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@500;600&display=swap');
+:root{--bg:#fffff9;--bg2:#fafaf7;--bg3:#f0eee8;--tx:#1a1a17;--tx2:#888;--tx3:#bbb;--bd:#e8e6e0;--ac:#1a1a17;--ok:#1a8754;--wn:#f0a500;--er:#d93025;--r:14px;--f:'DM Sans',sans-serif;--fs:'Fraunces',serif;--fm:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:var(--f);background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased}
+input,textarea,button{font-family:var(--f)}
+input:focus,textarea:focus{outline:none;border-color:var(--ac)!important}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes mi{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ani{animation:fi .4s cubic-bezier(.16,1,.3,1)}.mod{animation:mi .3s cubic-bezier(.16,1,.3,1)}
